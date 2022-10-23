@@ -4,7 +4,7 @@
 
 
 # COCO_CLASSES = (
-#     "person",
+#     "person",   
 #     "bicycle",
 #     "car",
 #     "motorcycle",
@@ -88,7 +88,7 @@
 
 
 COCO_CLASSES = (
-    "car",
-    "bus",
-    "truck",
+    "car", # 2
+    "bus", # 5
+    "truck", # 7
 )

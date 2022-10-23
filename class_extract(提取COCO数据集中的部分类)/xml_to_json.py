@@ -12,7 +12,7 @@ category_set = dict()
 image_set = set()
 
 category_item_id = 0
-image_id = 20180000000
+image_id = 20210000000
 annotation_id = 0
 
 def addCatItem(name):
@@ -169,9 +169,10 @@ def parseXmlFiles(xml_path):
 if __name__ == '__main__':
     # 需要自己设定的地址，一个是已生成的是xml文件的父目录；
     # 一个是要生成的json文件的目录
-    xml_dir = r'/home/ubuntu/COCO/annotations'
-    json_dir = r'/home/ubuntu/COCO/json/annotations'
-    dataset_lists = ['train2017', 'val2017']
+    xml_dir = r'/home/ubuntu/COCO/train'
+    json_dir = r'/home/ubuntu/COCO'
+    # dataset_lists = ['annotations']
+    dataset_lists = ['train2017']
     for dataset in dataset_lists:
         xml_path = os.path.join(xml_dir, dataset)
         json_file = json_dir + '/instances_{}.json'.format(dataset)

@@ -20,8 +20,8 @@ class YOLOXHead(nn.Module):
         self,
         num_classes,  # 80 ---> 3
         width=1.0,
-        strides=[8, 16, 32],
-        in_channels=[256, 512, 1024],
+        strides=[8, 16, 32], # 下采样倍数，输入图片大小为 640x640x3
+        in_channels=[256, 512, 1024],  # 经过下采样后输出特征图大小：80x80x256 40x40x512 20x20x1024
         act="silu",
         depthwise=False,
     ):

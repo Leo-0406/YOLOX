@@ -1,0 +1,42 @@
+import os
+import shutil
+import inspect
+
+def select_person(source_label_path, output_label_path, source_images_path, output_images_path):
+    if not os.path.exists(output_label_path):
+        os.makedirs(output_label_path)
+    if not os.path.exists(output_images_path):
+        os.makedirs(output_images_path)
+    for txt_file in os.listdir(source_label_path):
+        # print(txt_file)
+        # 得到了txt_file的集合
+        txt_name, extension = os.path.splitext(txt_file)
+        # print(txt_name)
+        with open(os.path.join(source_label_path, txt_file), "r") as f:
+            fb = f.readlines()
+            for line in fb[:]:
+                # line = line.strip() # 错误的,使用这句会将换行符 /n 去掉，使输出变为一行
+                linelist = line.split(" ")
+                first = linelist[0]
+                # output_file = os.path.join(output_path, txt_file)
+                # coco数据集中对应的类别id: car:3  bus:6  truck:8
+                if "2" or "5" or "7" == linelist[0]: 
+                    outfile = open(os.path.join(output_label_path, txt_file), "a+")   # w这种打开方式会每次打开都把以前的覆盖掉，使用a或者a+，追加写
+                    outfile.write(line)
+                    src = os.path.join(source_images_path, txt_name + ".jpg")
+                    dst = os.path.join(output_images_path, txt_name + ".jpg")
+                    shutil.copy(src, dst)
+                    print("已完成", dst)
+
+
+if __name__ == '__main__':
+    train_source_labels = "/home/ubuntu/YOLOX/datasets/COCO/annotations/train2017"
+    train_output_labels = "/home/ubuntu/COCO/annotations/train2017"
+    train_source_images = "/home/ubuntu/YOLOX/datasets/COCO/images/train2017"
+    train_output_images = "/home/ubuntu/COCO/images/train2017"
+    select_person(train_source_labels, train_output_labels, train_source_images, train_output_images)
+    valid_source_labels = "/home/ubuntu/YOLOX/datasets/COCO/annotations/val2017"
+    valid_output_labels = "/home/ubuntu/COCO/annotations/val2017"
+    valid_source_images = "/home/ubuntu/YOLOX/datasets/COCO/images/val2017"
+    valid_output_images = "/home/ubuntu/COCO/images/val2017"
+    select_person(valid_source_labels, valid_output_labels, valid_source_images, valid_output_images)

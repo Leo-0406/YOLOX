@@ -9,13 +9,15 @@ from PIL import Image, ImageDraw
  
 # 需要设置的路径
 savepath="/home/ubuntu/COCO/" 
-img_dir=savepath+'images/'
-anno_dir=savepath+'annotations/'
-datasets_list=['train2017', 'val2017']
-
-#coco有80类，这里写要提取类的名字，提取car,bus,truck三个类别
+img_dir = savepath + 'images/'
+anno_dir = savepath + 'annotations/'
+datasets_list=['train2017']
+ 
+# coco有80类，这里写要提取类的名字，以person为例
 classes_names = ['car', 'bus', 'truck'] 
-#包含所有类别的原coco数据集路径
+# 提取多个类别示例：classes_names = ['person','car','train']
+# 包含所有类别的原coco数据集路径
+# 包含所有类别的原coco数据集路径
 '''
 目录格式如下：
 $COCO_PATH
@@ -24,7 +26,7 @@ $COCO_PATH
 ----|val2017
 ----|test2017
 '''
-dataDir= '/home/ubuntu/YOLOX/datasets/COCO/' 
+dataDir = "/home/ubuntu/YOLOX/datasets/COCO/"
  
 headstr = """\
 <annotation>
@@ -165,3 +167,4 @@ for dataset in datasets_list:
             objs=showimg(coco, dataset, img, classes,classes_ids,show=False)
             print(objs)
             save_annotations_and_imgs(coco, dataset, filename, objs)
+mgs(coco, dataset, filename, objs)

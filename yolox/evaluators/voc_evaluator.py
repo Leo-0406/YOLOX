@@ -56,7 +56,7 @@ class VOCEvaluator:
             ap50 (float) : VOC 2007 metric AP of IoU=50
             summary (sr): summary info of evaluation.
         """
-        # TODO half to amp_test
+        # TODO： half to amp_test
         tensor_type = torch.cuda.HalfTensor if half else torch.cuda.FloatTensor
         model = model.eval()
         if half:
